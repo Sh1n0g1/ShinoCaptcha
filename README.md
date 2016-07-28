@@ -2,7 +2,7 @@
 
 A PHP based captcha which is not required database, outbound connection, cookie.
 
-[http://shinosec.com/shinocaptcha/ HTTP]
+Sample http://shinosec.com/shinocaptcha/
 
 ## How to use
 
