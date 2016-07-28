@@ -1,17 +1,12 @@
 <?php
-include './secret.php';
 //Replace not clear character 
-
+include './config.php';
 
 $im = imagecreatetruecolor($width, $height);	
 $background_color = imagecolorallocate($im, 255,255,255);
 $text_color = imagecolorallocate($im, 0,255,0);
 
 imageantialias($im, true);
-
-//Background
-//imagefilledrectangle($im, 1, 1,$width-2, $height-2, $background_color);
-
 
 $count=0;
 while($count < 20){
@@ -32,6 +27,7 @@ imagettftext($im,30,$angle,$width*1/8,$height*1/2+15,$text_color,'UC.ttf', Creat
 
 //Create Response
 header("Content-Type: image/png");
+
 imagepng($im);
 imagedestroy($im);
 
@@ -40,32 +36,16 @@ function CreateChallenge(){
 	if(isset($_GET['x']) && isset($_GET['t'])){
 		if(preg_match('/^[0-9]+$/',$_GET['t'])){
 			if (time() - $_GET['t'] < 10){
-				// Change the path
-				$forbiddenchar=array('8','B','0','D','1','2','5','4','6');
-				$comprehensive=array('H','J','Q','L','M','P','T','W','Y');
-				return str_replace(
-					$forbiddenchar,
-					$comprehensive,
-					strtoupper(
-						substr(
-							sha1(
-								$secret.
-								$_GET['x'].
-								$_SERVER['REMOTE_ADDR'].
-								$_GET['t']
-							),0
-							,6
-						)
-					)
-				);
+				include './config.php';
+				return str_replace($confusingchar,$replacingchar,strtoupper(substr(sha1($secret.$_GET['x'].$_SERVER['REMOTE_ADDR'].$_GET['t']),0,6)));
 			}else{
-				return 'ERROR1';
+				return 'TIMEOUT'."\n".(time()-$_GET['t']);
 			}
 		}else{
-			return 'ERROR2';
+			return 'INVALID';
 		}
 	}else{
-		return 'ERROR3';
+		return 'MISSING';
 	}
 }
 
