@@ -20,9 +20,9 @@ while($count < 20){
 }
 
 $angle=rand(-30,30);
-imagettftext($im,30,$angle,$width*1/8-3,$height*1/2+15-3,16777215,'UC.ttf', CreateChallenge());
-imagettftext($im,30,$angle,$width*1/8+3,$height*1/2+15+3,0,'UC.ttf', CreateChallenge());
-imagettftext($im,30,$angle,$width*1/8,$height*1/2+15,$text_color,'UC.ttf', CreateChallenge());
+imagettftext($im,30,$angle,$width*1/8-3,$height*1/2+15-3,16777215,'uc.ttf', CreateChallenge());
+imagettftext($im,30,$angle,$width*1/8+3,$height*1/2+15+3,0,'uc.ttf', CreateChallenge());
+imagettftext($im,30,$angle,$width*1/8,$height*1/2+15,$text_color,'uc.ttf', CreateChallenge());
 
 
 //Create Response
